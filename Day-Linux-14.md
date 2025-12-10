@@ -106,7 +106,7 @@ Decompress:
 unxz file.txt.xz
 
 🛠 Combining Archiving & Compression
-11. Create Compressed tar Archives
+11. Create Compressed tar Archives  
 tar + gzip
 tar -czvf backup.tar.gz /folder
 
@@ -162,6 +162,7 @@ A cron job has 5 time fields:
 |    |    └────────── Day of month (1-31)
 |    └─────────────── Hour (0-23)
 └──────────────────── Minute (0-59)
+
 
 
 Meaning of * → every value (every minute/hour/day)
