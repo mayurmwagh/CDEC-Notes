@@ -56,18 +56,18 @@ Often used with sort because uniq only removes adjacent duplicates.
 4. Read Files Using cat, uniq, and sort
 cat
 cat filename.txt
-cat file1.txt file2.txt > merged.txt
+    cat file1.txt file2.txt > merged.txt
 
-sort
-sort names.txt            # Sort alphabetically
-sort -r names.txt         # Reverse order
-sort -n numbers.txt       # Numeric sort
-sort -u items.txt         # Sort + remove duplicates
+    sort
+    sort names.txt            # Sort alphabetically
+    sort -r names.txt         # Reverse order
+    sort -n numbers.txt       # Numeric sort
+    sort -u items.txt         # Sort + remove duplicates
 
-uniq
-uniq file.txt             # Remove adjacent duplicates
-sort file.txt | uniq      # Proper duplicate removal
-uniq -c file.txt          # Count occurrences
+    uniq
+    uniq file.txt             # Remove adjacent duplicates
+    sort file.txt | uniq      # Proper duplicate removal
+    uniq -c file.txt          # Count occurrences
 
 
 5. Introduction to the find Utility
@@ -116,18 +116,9 @@ Search by Size
 find . -size +10M          # greater than 10MB
 find . -size -100k         # smaller than 100KB
 
-Search by Modification Date
-find . -mtime -1           # modified within last 1 day
-find . -mtime +7           # modified more than 7 days ago
-find . -mmin -30           # modified in last 30 minutes
-
 Search by Permissions
 find . -perm 644
-find . -perm -111          # executable files
 
-Execute Commands with find
-find . -name "*.log" -exec rm -f {} \;
-find . -type f -exec ls -l {} \;
 
 8. Practical Examples
 🔹 Find files by name
@@ -140,11 +131,6 @@ find . -type d -name "backup"
 🔹 Find files by size
 find /var -size +50M        # logs larger than 50MB
 
-🔹 Find recently modified files
-find /etc -mtime -2         # changed in last 2 days
-
 🔹 Find and delete files
 find . -name "*.tmp" -delete
 
-🔹 Find and list detailed information
-find . -type f -exec ls -lh {} \;

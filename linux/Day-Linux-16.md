@@ -444,11 +444,11 @@ COMMAND	        Command	            Name of the executable/process
 
 State Values (S Column)
 Code	Meaning
-R	Running
-S	Sleeping
-T	Stopped
-Z	Zombie
-D	Uninterruptible sleep (usually I/O)
+R	    Running
+S	    Sleeping
+T	    Stopped
+Z	    Zombie
+D	    Uninterruptible sleep (usually I/O)
 
 Summary for Students
 
@@ -458,3 +458,8 @@ Helps identify high resource usage processes.
 
 
 renice -n 10 1060 
+
+
+
+
+
