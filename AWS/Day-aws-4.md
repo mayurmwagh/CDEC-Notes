@@ -438,14 +438,16 @@ Regulatory compliance
 Licensing requirements (Oracle, Windows Server)
 Security-sensitive workloads
 
-Quick Comparison Summary
+## Quick Comparison Summary
 
-Option	                Cost	            Commitment  Flexibility	  Best For
-On-Demand	            High	            None	    Very High	  Short-term
-Reserved	            Low	                1–3 Years.  Medium	      Stable workloads
-Savings Plans	        Low.            	1–3 Years	High	      Long-term flexible
-Spot	                Very Low	        None	    Low	          Batch jobs
-Dedicated	            Highest	            Optional	Low	          Compliance
+| Option        | Cost      | Commitment | Flexibility | Best For                  |
+|---------------|-----------|------------|-------------|---------------------------|
+| On-Demand     | High      | None       | Very High   | Short-term workloads     |
+| Reserved      | Low       | 1–3 Years  | Medium      | Stable workloads         |
+| Savings Plans | Low       | 1–3 Years  | High        | Long-term flexible usage |
+| Spot          | Very Low  | None       | Low         | Batch jobs               |
+| Dedicated     | Highest   | Optional   | Low         | Compliance requirements  |
+
 
 
 
