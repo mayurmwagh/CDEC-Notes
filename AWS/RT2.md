@@ -53,6 +53,7 @@ Improving application availability
 Disaster recovery
 Reducing latency for users
 Types of Routing Policies in Route 53
+
 1. Simple Routing Policy
 Default and basic routing
 Returns a single record (or multiple randomly)
@@ -105,3 +106,87 @@ Returns multiple healthy IPs
 Works like basic load balancing
 
 👉 Improves availability without complex setup
+
+
+
+# Diffrent types of records
+
+1. A Record (Address Record)
+
+Maps a domain name to an IPv4 address
+Example:
+example.com → 192.168.1.1
+
+👉 Most commonly used record
+
+2. AAAA Record
+Maps a domain to an IPv6 address
+Example:
+example.com → 2400:cb00:2048:1::c629:d7a2
+3. CNAME (Canonical Name)
+Maps one domain to another domain
+Example:
+www.example.com → example.com
+
+👉 Used for domain redirection
+
+4. MX Record (Mail Exchange)
+Defines mail servers for your domain
+Example:
+example.com → mail.google.com
+
+👉 Required for email services
+
+5. TXT Record
+Stores text information
+Used for:
+Domain verification
+SPF, DKIM (email security)
+
+👉 Example:
+"v=spf1 include:_spf.google.com ~all"
+
+6. NS Record (Name Server)
+Specifies authoritative name servers
+Automatically created in hosted zone
+
+👉 Connects your domain to Route 53
+
+7. SOA Record (Start of Authority)
+Contains admin info about domain
+Includes:
+Primary DNS server
+Email of admin
+Refresh settings
+
+👉 Managed automatically
+
+8. PTR Record (Reverse DNS)
+Maps IP address → domain name
+Example:
+192.168.1.1 → example.com
+
+👉 Used in email verification & logging
+
+9. SRV Record (Service Record)
+Defines location of specific services
+Example:
+Used for VoIP, chat apps
+
+👉 Contains port number, priority
+
+10. CAA Record (Certification Authority Authorization)
+Specifies which Certificate Authorities can issue SSL certificates for your domain
+
+👉 Improves security
+
+11. Alias Record (AWS Specific)
+Used in Route 53 instead of CNAME for AWS resources
+Can point to:
+S3 bucket
+Load Balancer
+CloudFront
+
+👉 Advantage:
+
+Works at root domain (CNAME cannot)
