@@ -1,0 +1,81 @@
+1. Introduction to DNS Service
+
+DNS (Domain Name System) is like the phonebook of the internet.
+It translates human-readable domain names into IP addresses.
+
+Why DNS is needed
+Humans remember names easily (e.g., google.com)
+Computers communicate using IP addresses (e.g., 142.250.183.14)
+
+How DNS works (Basic Flow)
+User enters domain in browser
+Request goes to DNS resolver
+Resolver checks cache
+If not found → queries DNS servers
+IP address is returned
+Browser connects to the server
+
+Key Components
+DNS Resolver – Handles query from client
+Root Name Server – Top-level DNS
+TLD Server – (.com, .org, .in)
+Authoritative DNS Server – Final answer provider
+
+2. DNS Records and Zones
+DNS Records
+
+DNS records store mapping information.
+
+Common Types of Records
+Record Type	Purpose
+
+A Record	Maps domain → IPv4 address
+AAAA Record	Maps domain → IPv6 address
+CNAME	Maps one domain to another
+MX Record	Mail server routing
+NS Record	Name servers for domain
+TXT Record	Text data (verification, SPF, DKIM)
+SRV Record	Service-specific records
+
+Example:
+example.com → 192.168.1.1 (A Record)
+www.example.com → example.com (CNAME)
+DNS Zones
+
+A DNS Zone is a portion of DNS namespace managed by a specific organization.
+
+Types of Zones:
+Forward Lookup Zone → Domain → IP
+Reverse Lookup Zone → IP → Domain
+Key Points:
+Each zone contains DNS records
+Managed by authoritative DNS servers
+Helps distribute DNS management
+
+3. Introduction to Amazon Route 53
+
+Amazon Route 53 is a highly available and scalable DNS web service by AWS.
+
+Why “Route 53”?
+53 refers to DNS port number (53)
+
+Key Features
+
+Domain Registration
+DNS Routing
+Health Checks
+Traffic Management
+
+Routing Policies
+
+Simple Routing
+Weighted Routing
+Latency-based Routing
+Failover Routing
+Geolocation Routing
+
+Benefits
+High availability
+Low latency
+Integrated with AWS services
+Pay-as-you-go pricing
