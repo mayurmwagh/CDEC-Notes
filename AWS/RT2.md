@@ -71,6 +71,7 @@ Server B → 30% traffic
 
 Testing new versions (A/B testing)
 Gradual deployments
+
 3. Latency-Based Routing
 Routes user to the lowest latency (closest) region
 Improves performance
@@ -123,6 +124,7 @@ example.com → 192.168.1.1
 Maps a domain to an IPv6 address
 Example:
 example.com → 2400:cb00:2048:1::c629:d7a2
+
 3. CNAME (Canonical Name)
 Maps one domain to another domain
 Example:

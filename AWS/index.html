@@ -1,72 +1,122 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My S3 Static Website</title>
+    <title>My Website</title>
+
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f8;
-            text-align: center;
             margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
         }
+
         header {
-            background-color: #232f3e;
+            background: #2c3e50;
             color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        nav {
+            background: #34495e;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #f1c40f;
+        }
+
+        .hero {
+            background: #ecf0f1;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            margin-bottom: 10px;
+        }
+
+        .container {
             padding: 20px;
         }
-        h1 {
-            margin: 0;
+
+        .cards {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
         }
-        .container {
-            margin-top: 50px;
-        }
+
         .card {
-            background: white;
-            padding: 30px;
-            margin: auto;
-            width: 60%;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: 250px;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
+
         footer {
-            margin-top: 50px;
-            padding: 15px;
-            background-color: #232f3e;
+            background: #2c3e50;
             color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Welcome to My S3 Website</h1>
-</header>
+    <header>
+        <h2>My Website</h2>
+        <p>Welcome to our platform</p>
+    </header>
 
-<div class="container">
-    <div class="card">
-        <h2>Hello 👋</h2>
-        <p>This is a static website hosted on Amazon S3.</p>
-        <p>You have successfully configured Static Website Hosting.</p>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Courses</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </nav>
 
-```
-    <h3>Features:</h3>
-    <ul style="list-style: none; padding: 0;">
-        <li>✔ Fast and scalable</li>
-        <li>✔ Highly available</li>
-        <li>✔ Easy to deploy</li>
-    </ul>
-</div>
-```
+    <section class="hero">
+        <h1>Learn. Grow. Succeed.</h1>
+        <p>Build your career with practical training</p>
+    </section>
 
-</div>
+    <div class="container">
+        <h2>Our Features</h2>
 
-<footer>
-    <p>© 2026 My S3 Website | Powered by AWS</p>
-</footer>
+        <div class="cards">
+            <div class="card">
+                <h3>Expert Trainers</h3>
+                <p>Learn from industry professionals with real experience.</p>
+            </div>
+
+            <div class="card">
+                <h3>Hands-on Practice</h3>
+                <p>Work on real-time projects and practical scenarios.</p>
+            </div>
+
+            <div class="card">
+                <h3>Placement Support</h3>
+                <p>Get guidance and support to land your dream job.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 My Website | All Rights Reserved</p>
+    </footer>
 
 </body>
 </html>
