@@ -4,10 +4,10 @@
 
 ## 1. GitHub vs GitLab
 
-| Feature | GitHub | GitLab |
+| Feature                | GitHub.   |   GitLab     |
 |---|---|---|
-| **Owner** | Microsoft | GitLab Inc. |
-| **Primary Focus** | Open-source collaboration & social coding | Full DevOps lifecycle platform |
+| **Owner** |.            Microsoft |   GitLab Inc. |
+| **Primary Focus**      | Open-source collaboration & social coding | Full DevOps lifecycle platform |
 | **CI/CD** | GitHub Actions (external integrations) | Built-in CI/CD pipelines |
 | **Self-Hosting** | GitHub Enterprise (paid) | GitLab CE (free) & EE (paid) |
 | **Issue Tracking** | Basic (Issues, Projects) | Advanced (Boards, Milestones, Epics) |
@@ -381,3 +381,4 @@ git log --oneline --graph
 ---
 
 *Notes prepared for learning Git, GitLab, VS Code, and IDE fundamentals.*
+
