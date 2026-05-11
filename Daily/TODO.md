@@ -22,3 +22,25 @@ Batch plan
          Date will be same. 10 CDEC, 20 XDSAAI   
          Planning for 4 labs, trainer,Time slot (4 labs, 3 inquiry)   
          
+Placment:
+
+        Placement eligibility check 
+         -- Student who has complited cdec batch 
+         -- Fees complition criteria is there 
+         -- Call older student and insist for placment batch 
+
+
+Oprations Assistance 
+
+        Daily monitoring
+
+        Weekly Monitoring 
+            Batch data
+            trainer data
+
+        Monthly Monitoring
+            Batch data
+            trainer data
+
+        Quterly Monitoring
+             
