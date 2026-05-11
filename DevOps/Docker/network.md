@@ -317,51 +317,6 @@ docker run --network app-net nginx
 
 ---
 
-# Real-World Example
-
-Create network:
-
-```bash
-docker network create project-net
-```
-
-Run MySQL Database:
-
-```bash
-docker run -d \
---name mysql-db \
---network project-net \
--e MYSQL_ROOT_PASSWORD=root \
-mysql
-```
-
-Run Backend API:
-
-```bash
-docker run -d \
---name backend-api \
---network project-net \
-my-api-image
-```
-
-Run Frontend Application:
-
-```bash
-docker run -d \
---name frontend \
---network project-net \
-nginx
-```
-
-Now:
-- Frontend can communicate with backend
-- Backend can communicate with database
-
-Using container names:
-- `backend-api`
-- `mysql-db`
-
----
 
 # Best Practices
 
@@ -404,16 +359,16 @@ docker logs nginx-server
 
 # Important Commands Summary
 
-| Command | Description |
-|----------|-------------|
-| docker network ls | List networks |
-| docker network inspect bridge | Inspect network |
-| docker network create mynet | Create network |
-| docker network rm mynet | Delete network |
-| docker network prune | Remove unused networks |
-| docker network connect | Connect container |
-| docker network disconnect | Disconnect container |
-| docker run --network | Run container on network |
+| Command                        | Description |
+|----------                      |-------------|
+| docker network ls              | List networks |
+| docker network inspect bridge  | Inspect network |
+| docker network create mynet    | Create network |
+| docker network rm mynet.       | Delete network |
+| docker network prune           | Remove unused networks |
+| docker network connect         | Connect container |
+| docker network disconnect      | Disconnect container |
+| docker run --network           | Run container on network |
 
 ---
 
@@ -620,17 +575,4 @@ docker network rm app-network
 
 ---
 
-## Real-World Example
-
-You can replace these containers with:
-
-- `frontend` → React or Angular application
-- `backend` → Node.js, Java, or Python API
-- `database` → MySQL or PostgreSQL
-
-Containers communicate using service names such as:
-
-```bash
-http://backend:8080
-mysql -h database -u root -p
 ```
