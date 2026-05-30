@@ -1,0 +1,337 @@
+1. What is Amazon EKS?
+
+Amazon EKS (Elastic Kubernetes Service) is a managed Kubernetes service provided by AWS.
+
+With EKS:
+
+AWS manages the Kubernetes control plane.
+You manage worker nodes or use serverless nodes with Fargate.
+Highly available and scalable.
+Integrated with IAM, VPC, CloudWatch, and ELB.
+
+Benefits of EKS
+No need to manage Kubernetes master nodes.
+Automatic patching and upgrades.
+Secure integration with AWS services.
+Production-ready.
+
+
+2. EKS Architecture
+                    +-------------------------+
+                    |   AWS Managed Control   |
+                    |        Plane            |
+                    | API Server, ETCD, etc.  |
+                    +-----------+-------------+
+                                |
+                    +-----------+-------------+
+                    |      Worker Nodes       |
+                    |   EC2 Instances/Fargate |
+                    +-----------+-------------+
+                                |
+                    +-----------+-------------+
+                    |       Pods & Services   |
+                    +-------------------------+
+
+
+
+2. Prerequisites
+
+Before creating an EKS cluster, ensure the following are installed:
+
+AWS CLI
+kubectl
+eksctl
+AWS account with proper permissions
+IAM user configured using aws configure
+
+
+3. Install AWS CLI
+Linux/macOS
+curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+sudo installer -pkg AWSCLIV2.pkg -target /
+Verify Installation
+aws --version
+4. Configure AWS Credentials
+aws configure
+
+Provide:
+
+AWS Access Key ID
+AWS Secret Access Key
+Default region (e.g., ap-south-1)
+Output format (json)
+
+
+5. Install kubectl
+Linux
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+macOS
+brew install kubectl
+Verify
+kubectl version --client
+
+6. Install eksctl
+Linux/macOS
+brew install eksctl
+
+or
+
+curl --silent --location \
+"https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" \
+| tar xz -C /tmp
+
+sudo mv /tmp/eksctl /usr/local/bin
+Verify
+eksctl version
+
+7. Create EKS Cluster
+Basic Command
+eksctl create cluster \
+  --name my-cluster \
+  --region ap-south-1 \
+  --nodegroup-name workers \
+  --node-type t3.medium \
+  --nodes 2
+Parameters Explained
+Parameter	Description
+--name	Cluster name
+--region	AWS region
+--nodegroup-name	Worker node group name
+--node-type	EC2 instance type
+--nodes	Number of worker nodes
+Cluster Creation Time
+Typically takes 15–20 minutes.
+
+
+8. Verify Cluster Creation
+eksctl get cluster
+kubectl get nodes
+
+Example Output:
+
+NAME                                               STATUS   ROLES    AGE   VERSION
+ip-192-168-10-10.ap-south-1.compute.internal       Ready    <none>   5m    v1.31
+ip-192-168-20-20.ap-south-1.compute.internal       Ready    <none>   5m    v1.31
+
+
+9. Update kubeconfig to Access EKS Cluster
+
+If kubeconfig is not configured automatically:
+
+aws eks update-kubeconfig \
+  --region ap-south-1 \
+  --name my-cluster
+
+This command updates:
+
+~/.kube/config
+
+10. Test Cluster Access
+
+kubectl get nodes
+kubectl get namespaces
+kubectl cluster-info
+
+
+11. What is a Pod?
+
+A Pod is the smallest deployable unit in Kubernetes.
+
+A Pod can contain:
+
+One container
+Multiple containers sharing the same:
+Network namespace
+Storage volumes
+Pod Characteristics
+Gets a unique IP address.
+Containers inside the pod communicate using localhost.
+Pods are ephemeral (can be recreated).
+
+
+12. Pod Architecture
++----------------------------------+
+|              Pod                 |
+|                                  |
+|  +----------------------------+  |
+|  | Main Container             |  |
+|  | (Application Container)    |  |
+|  +----------------------------+  |
+|                                  |
+|  +----------------------------+  |
+|  | Sidecar Container          |  |
+|  | (Logging/Monitoring)       |  |
+|  +----------------------------+  |
+|                                  |
++----------------------------------+
+
+13. Main Container
+
+The primary application container.
+
+Examples:
+
+Nginx web server
+Java Spring Boot application
+Python Flask application
+Example
+containers:
+- name: web
+  image: nginx
+
+
+
+Create Pod:
+
+kubectl apply -f sidecar.yaml
+
+Verify:
+
+kubectl get pods
+kubectl logs sidecar-demo -c logger
+
+16. Introduction to Service
+
+A Service provides a stable network endpoint to access Pods.
+
+Without a Service:
+
+Pod IPs change whenever Pods are recreated.
+
+With a Service:
+
+Stable DNS name
+Stable IP address
+Load balancing across multiple Pods
+
+
+17. Types of Services
+Type	Description
+ClusterIP	Internal access only (default)
+NodePort	Accessible through worker node IP and port
+LoadBalancer	Creates AWS ELB automatically
+ExternalName	Maps to an external DNS name
+
+
+18. Create First Pod Using kubectl run
+kubectl run my-nginx \
+  --image=nginx \
+  --port=80
+
+Verify:
+
+kubectl get pods
+kubectl describe pod my-nginx
+
+Expected Output:
+
+NAME       READY   STATUS    RESTARTS   AGE
+my-nginx   1/1     Running   0          20s
+
+
+19. View Pod Logs
+kubectl logs my-nginx
+
+20. Execute Commands Inside Pod
+kubectl exec -it my-nginx -- bash
+
+If bash is unavailable:
+
+kubectl exec -it my-nginx -- sh
+
+21. Expose Pod Using kubectl expose
+Create ClusterIP Service
+kubectl expose pod my-nginx \
+  --port=80 \
+  --target-port=80 \
+  --type=ClusterIP \
+  --name=my-nginx-service
+
+Verify:
+
+kubectl get svc
+
+22. Expose Pod as LoadBalancer (Recommended in EKS)
+kubectl expose pod my-nginx \
+  --port=80 \
+  --target-port=80 \
+  --type=LoadBalancer \
+  --name=my-nginx-lb
+
+
+
+
+24. Complete Practical Workflow
+Step 1: Create Cluster
+eksctl create cluster \
+  --name demo-cluster \
+  --region ap-south-1 \
+  --nodes 2
+Step 2: Verify Nodes
+kubectl get nodes
+Step 3: Create Pod
+kubectl run my-nginx --image=nginx
+Step 4: Verify Pod
+kubectl get pods
+Step 5: Expose Pod
+kubectl expose pod my-nginx \
+  --port=80 \
+  --type=LoadBalancer
+Step 6: Get Load Balancer URL
+kubectl get svc
+Step 7: Open Browser
+http://<EXTERNAL-IP>
+25. Delete Pod
+kubectl delete pod my-nginx
+26. Delete Service
+kubectl delete svc my-nginx
+27. Delete EKS Cluster
+eksctl delete cluster \
+  --name demo-cluster \
+  --region ap-south-1
+28. Important kubectl Commands
+Command	Purpose
+kubectl get pods	List pods
+kubectl get svc	List services
+kubectl get nodes	List worker nodes
+kubectl describe pod <name>	Pod details
+kubectl logs <pod>	Show logs
+kubectl exec -it <pod> -- sh	Open shell
+kubectl delete pod <name>	Delete pod
+29. Real-World Example
+
+Suppose you deploy an Nginx pod in EKS:
+
+Pod runs the Nginx container.
+Service of type LoadBalancer creates AWS ELB.
+ELB provides a public DNS name.
+Users access the application using the ELB DNS.
+30. Interview Questions
+What is EKS?
+
+Managed Kubernetes service on AWS.
+
+What is a Pod?
+
+Smallest deployable unit in Kubernetes.
+
+What is a Sidecar Container?
+
+Helper container running alongside the main container.
+
+What is a Service?
+
+Stable networking endpoint for Pods.
+
+Difference Between Pod and Service?
+Pod = Runs containers.
+Service = Provides network access.
+Which Service Type is Common in EKS?
+
+LoadBalancer.
+
+Which Tool Creates EKS Clusters?
+
+

@@ -1,0 +1,106 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  APP_MODE: "production"
+  APP_PORT: "8080"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app-pod
+spec:
+  containers:
+  - name: my-app-container
+    image: nginx:latest
+    env:
+    - name: APP_MODE
+      valueFrom:
+        configMapKeyRef:
+          name: app-config
+          key: APP_MODE
+    - name: APP_PORT
+      valueFrom:
+        configMapKeyRef:
+          name: app-config  
+          key: APP_PORT 
+
+
+--- 
+# secret yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: db-secret
+type: Opaque
+data:
+  DB_USERNAME: YWRtaW4=    # base64 encoded value of "admin"
+  DB_PASSWORD: QWRtaW5AMTIz  # base64 encoded value of "password"
+
+
+  # pod .yaml 
+  apiVersion: v1
+kind: Pod
+metadata:
+  name: secret-pod
+spec:
+  containers:
+  - name: secret-container
+    image: nginx:latest
+    env:
+    - name: DB_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: db-secret
+          key: DB_USERNAME
+    - name: DB_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: db-secret
+          key: DB_PASSWORD
+
+
+# persistant volume 
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-volume
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath: 
+    path: /data
+
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi 
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pvc-pod1
+spec:
+  containers:
+  - name: pvc-container
+    image: nginx:latest
+    volumeMounts:
+    - name: pvc-storage
+      mountPath: /usr/share/nginx/html
+  volumes:
+  - name: pvc-storage
+    persistentVolumeClaim:
+      claimName: pvc-claim

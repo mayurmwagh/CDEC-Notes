@@ -169,3 +169,25 @@ USER username
 Example
 RUN useradd appuser
 USER appuser
+
+
+
+# Use Ubuntu as the base image
+FROM ubuntu:24.04
+ 
+
+# Update package list and install Apache HTTP Server
+RUN apt-get update && \
+    apt-get install -y apache2 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Create a simple web page
+RUN echo "<h1>Apache HTTP Server Running on Ubuntu Container</h1>" \
+    > /var/www/html/index.html
+
+# Expose HTTP port
+EXPOSE 80
+
+# Start Apache in the foreground
+CMD ["apache2ctl", "-D", "FOREGROUND"]
