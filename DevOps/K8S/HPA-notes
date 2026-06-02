@@ -1,0 +1,32 @@
+Practical Implementation of HPA (Horizontal Pod Autoscaler) in Kubernetes
+What is HPA?
+
+Horizontal Pod Autoscaler (HPA) automatically increases or decreases the number of pods in a deployment based on metrics such as:
+
+CPU Utilization
+Memory Utilization
+Custom Metrics
+External Metrics
+
+Example
+
+Suppose your application normally runs with 2 pods.
+
+CPU Usage < 50% → Keep 2 pods
+CPU Usage > 70% → Scale to 4 pods
+CPU Usage > 90% → Scale to 6 pods
+CPU Usage drops → Scale down automatically
+
+
+
+In Kubernetes, resource allocation is done using requests and limits in the container specification of a Deployment.
+
+Why Resource Allocation?
+Requests → Minimum resources guaranteed to the container.
+Limits → Maximum resources the container can consume.
+
+This helps:
+
+Prevent one pod from consuming all node resources.
+Enable HPA to calculate CPU utilization correctly.
+Improve scheduling decisions.
