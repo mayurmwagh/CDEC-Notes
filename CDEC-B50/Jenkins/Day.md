@@ -95,10 +95,10 @@ Faster releases
 
 
 Comparison Table
-Feature	                 Continuous Delivery	        Continuous Deployment
-Production deployment	    Manual approval	            Fully automatic
+Feature	                  Continuous Delivery	        Continuous Deployment
+Production deployment	    Manual approval	            Fully automatic (manual approval)
 Human intervention	        Required	                Not required
-Risk level	                Lower               	    Higher
+Risk level	                Lower               	         Higher
 Release frequency	        Frequent	                Very frequent
 Suitable for	            Enterprise applications	    SaaS and web apps
 
